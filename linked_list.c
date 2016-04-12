@@ -19,19 +19,19 @@ typedef struct list_node{
 void insertNode(Node **ptr, char data)
 {
 	Node *newNode;
-	if(*ptr == NULL) // ­Y¦ê¦C¬°ªÅ 
-	{ // «Ø¥ß·s¸`ÂI¡A¨Ã§â¦ê¦CÀY«ü°w«ü¦V·s¸`ÂI 
+	if(*ptr == NULL) // è‹¥ä¸²åˆ—ç‚ºç©º 
+	{ // å»ºç«‹æ–°ç¯€é»ï¼Œä¸¦æŠŠä¸²åˆ—é ­æŒ‡é‡æŒ‡å‘æ–°ç¯€é» 
 		newNode = (Node*)malloc(sizeof(Node));
 		*ptr = newNode;
 	}
 	else
 	{
 		newNode = *ptr;
-		while(newNode->next != NULL) // ´`Àô´M§älist§Àºİ 
+		while(newNode->next != NULL) // å¾ªç’°å°‹æ‰¾listå°¾ç«¯ 
 		{
 			newNode =  newNode->next;
 		}
-		newNode->next = (Node*)malloc(sizeof(Node)); // ¦b§Àºİ«Ø¥ß·sªºNode
+		newNode->next = (Node*)malloc(sizeof(Node)); // åœ¨å°¾ç«¯å»ºç«‹æ–°çš„Node 
 		newNode = newNode->next;
 	}
 	newNode->data = data;
@@ -45,22 +45,22 @@ int deleteNode(Node **ptr, char data)
 	if(*ptr == NULL)
 		return 0;
 	node = *ptr;
-	while(node != NULL) // ´`Àô·j´Mlist¸`ÂI 
+	while(node != NULL) // å¾ªç’°æœå°‹listç¯€é» 
 	{
-		if(node->data == data) // ­Y¬d§ä¨ì¾Ö¦³¸Ó¼Æ¾Úªº¸`ÂI 
-		{ // §R°£¸Ó¸`ÂI 
-			if(node == *ptr) // ­Y¸Ó¸`ÂI¬OlistÀY 
-				*ptr = node->next; //listÀY³]¸m¬°«á¤@­Ó¸`ÂI  
+		if(node->data == data) // è‹¥æŸ¥æ‰¾åˆ°æ“æœ‰è©²æ•¸æ“šçš„ç¯€é» 
+		{ // åˆªé™¤è©²ç¯€é» 
+			if(node == *ptr) // è‹¥è©²ç¯€é»æ˜¯listé ­ 
+				*ptr = node->next; //listé ­è¨­ç½®ç‚ºå¾Œä¸€å€‹ç¯€é»  
 			else
-				preNode->next = node->next; // §â«e¤@­Ó¸`ÂI»P«á¤@­Ó¸`ÂI¬Û³s 
-			free(node); // §R°£¸`ÂI 
+				preNode->next = node->next; // æŠŠå‰ä¸€å€‹ç¯€é»èˆ‡å¾Œä¸€å€‹ç¯€é»ç›¸é€£ 
+			free(node); // åˆªé™¤ç¯€é» 
 			return 1;
 		}
-		// ´M§ä¤U¤@­Ó¸`ÂI  
+		// å°‹æ‰¾ä¸‹ä¸€å€‹ç¯€é»  
 		preNode = node;
 		node = node->next;
 	}
-	return 0; // ¨S§ä¨ì¸`ÂI 
+	return 0; // æ²’æ‰¾åˆ°ç¯€é» 
 }
 
 
@@ -85,38 +85,38 @@ int swapNode(Node **ptr, char data1, char data2)
 		return 0;
 	node=n1=n2=*ptr;
 	
-	// ´M§ädata1¡Bdata2ªº¸`ÂIn1,n2 
+	// å°‹æ‰¾data1ã€data2çš„ç¯€é»n1,n2 
 	while(node != NULL)
 	{
-		if(node->data == data1) // §ä¨ìn1 
+		if(node->data == data1) // æ‰¾åˆ°n1 
 			found_n1 = 1;
-		else if(node->data == data2) // §ä¨ìn2 
+		else if(node->data == data2) // æ‰¾åˆ°n2 
 			found_n2 = 1;
 			
-		if(!found_n1) // ­Yn1¨S§ä¨ì 
-		{ // ©¹¤U·j´M 
+		if(!found_n1) // è‹¥n1æ²’æ‰¾åˆ° 
+		{ // å¾€ä¸‹æœå°‹ 
 			pre_n1 = node;
 			n1 = node->next;
 		}
-		if(!found_n2) // ­Yn2¨S§ä¨ì 
-		{ // ©¹¤U·j´M 
+		if(!found_n2) // è‹¥n2æ²’æ‰¾åˆ° 
+		{ // å¾€ä¸‹æœå°‹ 
 			pre_n2 = node;
 			n2 = node->next;
 		}
 		node = node->next;
 	}
-	if(!found_n1 || !found_n2) // ­Y¦³¥ô¦ó¤@­Ó¸`ÂI¨S§ä¨ì¡A«h¥¢±Ñ 
+	if(!found_n1 || !found_n2) // è‹¥æœ‰ä»»ä½•ä¸€å€‹ç¯€é»æ²’æ‰¾åˆ°ï¼Œå‰‡å¤±æ•— 
 		return 0;
 	
 	if(n1 != n2)
 	{
-		// preNode->next¥ı´« 
-		if(n1 == *ptr) // n1¬OÀY
+		// preNode->nextå…ˆæ› 
+		if(n1 == *ptr) // n1æ˜¯é ­
 		{
 			*ptr = n2;
 			pre_n2->next = n1;
 		}
-		else if(n2 == *ptr) // n2¬OÀY
+		else if(n2 == *ptr) // n2æ˜¯é ­
 		{
 			*ptr = n1;
 			pre_n1->next = n2;
@@ -125,7 +125,7 @@ int swapNode(Node **ptr, char data1, char data2)
 		{
 			SWAP(pre_n1->next, pre_n2->next)
 		}
-		// ¥æ´«Node->next 
+		// äº¤æ›Node->next 
 		SWAP(n1->next, n2->next)
 		
 		return 1;
