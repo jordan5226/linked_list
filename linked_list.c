@@ -135,6 +135,27 @@ int swapNode(Node **ptr, char data1, char data2)
 }
 
 
+void reverse(Node **ptr)
+{
+	Node *preNode, *node, *nextNode;
+	if(*ptr == NULL)
+		return;
+	node = preNode = *ptr;
+	nextNode = node->next;
+	while(nextNode != NULL)
+	{
+		preNode = node;
+		node = nextNode;
+		nextNode = node->next;
+		
+		if(preNode == *ptr)
+			preNode->next = NULL;
+		node->next = preNode;
+	}
+	*ptr = node;
+}
+
+
 int main()
 {
 	Node *head = NULL;
@@ -146,7 +167,8 @@ int main()
 		printf("(2)delete\n");
 		printf("(3)print\n");
 		printf("(4)swap\n");
-		printf("(5)exit\n");
+		printf("(5)reverse\n");
+		printf("(6)exit\n");
 		printf(">>");
 		fflush(stdin);
 		scanf("%c", &in);
@@ -177,6 +199,9 @@ int main()
 				printf("Swap failed!\n");
 			break;
 		case '5':
+			reverse(&head);
+			break;
+		case '6':
 			return 0;
 		}
 		printList(head);
